@@ -421,6 +421,12 @@
         },
 
         _getDistance: function (latlng1, latlng2) {
+            var p1 = turf.point(latlng1);
+            var p2 = turf.point(latlng2);
+            return turf.distance(p1,p2);
+        }
+            
+        _old_getDistance: function (latlng1, latlng2) {
             var earthRadius = 6378137; // radius of the earth in meter
             var lat1 = this.toRadians(latlng1.lat);
             var lat2 = this.toRadians(latlng2.lat);
