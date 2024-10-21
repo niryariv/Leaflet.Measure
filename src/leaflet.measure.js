@@ -421,9 +421,9 @@
         },
 
         _getDistance: function (latlng1, latlng2) {
-            var p1 = turf.point(latlng1);
-            var p2 = turf.point(latlng2);
-            return turf.distance(p1,p2);
+            var p1 = turf.point([latlng1.lat, latlng1.lng]);
+            var p2 = turf.point([latlng2.lat, latlng2.lng]);
+            return turf.distance(p1,p2) * 1000;
         },
             
         _old_getDistance: function (latlng1, latlng2) {
@@ -443,7 +443,18 @@
                 ? this._numberFormat(a, L.Measure.squareMeterDecimals) + " " + L.Measure.squareMeter
                 : this._numberFormat(a / 1e6, L.Measure.squareKilometersDecimals) + " " + L.Measure.squareKilometers;
         },
+
         _getArea: function (points) {
+            points.push(points[0]); // turf need to close the polygon
+            var p = [];
+            points.forEach(function (point) {
+                p.push([point.lat, point.lng]);
+            });
+            var poly = turf.polygon([p]);
+            return Math.abs(turf.area(poly));
+        },
+
+        _old_getArea: function (points) {
             var earthRadius = 6378137;
             var area = 0;
             var len = points.length;
