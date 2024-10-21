@@ -421,8 +421,8 @@
         },
 
         _getDistance: function (latlng1, latlng2) {
-            var p1 = turf.point([latlng1.lat, latlng1.lng]);
-            var p2 = turf.point([latlng2.lat, latlng2.lng]);
+            var p1 = turf.point([latlng1.lng, latlng1.lat]);
+            var p2 = turf.point([latlng2.lng, latlng2.lat]);
             return turf.distance(p1,p2) * 1000;
         },
             
@@ -448,7 +448,7 @@
             points.push(points[0]); // turf need to close the polygon
             var p = [];
             points.forEach(function (point) {
-                p.push([point.lat, point.lng]);
+                p.push([point.lng, point.lat]);
             });
             var poly = turf.polygon([p]);
             return Math.abs(turf.area(poly));
