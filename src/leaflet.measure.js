@@ -364,12 +364,14 @@
                         fillColor: this.options.color,
                         fillOpacity: 0.5,
                         interactive: false,
+                        pmIgnore: true,
                     });
                 } else {
                     this._measurePath = new L.Polyline([latlng], {
                         weight: 2,
                         color: this.options.color,
                         interactive: false,
+                        pmIgnore: true,
                     });
                 }
                 this._trail.overlays.addLayer(this._measurePath);
